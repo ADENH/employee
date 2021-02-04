@@ -55,4 +55,10 @@ public class Employee implements Serializable {
 	private Integer gender;
 	@NotEmpty
 	private Integer isDelete;
+	
+	@Override  
+	public String toString()  
+	{  
+	return "Employee [employee id=" + id+ ", name=" + name + ", birthDate=" + birthDate + ", idNumber=" + idNumber + ", gender=" + gender + ", isDelete=" + isDelete + "]";  
+	} 
 }
