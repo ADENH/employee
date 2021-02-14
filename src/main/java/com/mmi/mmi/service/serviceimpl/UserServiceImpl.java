@@ -10,7 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mmi.mmi.dto.UserDto;
+import com.mmi.mmi.model.Position;
 import com.mmi.mmi.model.User;
+import com.mmi.mmi.repository.PositionRepository;
 import com.mmi.mmi.repository.UserRepository;
 import com.mmi.mmi.service.UserService;
 
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PositionRepository positionRepository;
 //	@Autowired
 //	private PasswordEncoder passwordEncoder;
 
@@ -48,12 +53,15 @@ public class UserServiceImpl implements UserService{
 		String password = bCryptPasswordEncoder.encode(user.getPassword());
 		user.setPassword(password);
 		
+		Position position = positionRepository.findByCode(user.getCodeJabatan());
+		
 		User dataUser = new User();
 		dataUser.setEmail(user.getEmail());
 		dataUser.setFirstName(user.getFirstName());
 		dataUser.setLastName(user.getLastName());
 		dataUser.setPassword(user.getPassword());
 		dataUser.setUserName(user.getUserName());
+		dataUser.setPosition(position);
 		
 		String id = Optional.of(userRepository.save(dataUser)).map(v -> v.getId()).get();
 		return userRepository.findById(id).get();

@@ -1,8 +1,11 @@
 package com.mmi.mmi.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class CurrentPrincipal implements UserDetails {
@@ -25,8 +28,11 @@ public class CurrentPrincipal implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		List<GrantedAuthority> roles = new ArrayList<>();
+		if (user.getPosition() != null) {
+			roles.add(new SimpleGrantedAuthority(user.getPosition().getName()));
+		}
+		return roles;
 	}
 
 	@Override

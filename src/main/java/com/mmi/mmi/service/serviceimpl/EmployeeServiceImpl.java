@@ -58,13 +58,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		System.out.println(employeeDTO);
 		List<Employee> employees = employeeRepository.findByIdNumber(idNumber);
 		if(!employees.isEmpty()) {
-			employee = employees.get(0);
-			employee.setBirthDate(employeeDTO.getTanggalLahir());
-			employee.setGender(employeeDTO.getJenisKelamin() == GenderConverter.gender.Pria ? 1 : 2);
-			employee.setIdNumber(employeeDTO.getNip());
-			employee.setIsDelete(0);
-			employee.setName(employeeDTO.getNama());
-			employee.setPosition(positionRepository.findByCode(employeeDTO.getCodeJabatan()));
+			employee = setEmployeeData(employeeDTO, employees);
 			return employeeRepository.save(employee);
 		}
 //		Position position = positionRepository.findByCode(employeeDTO.getCodeJabatan());
@@ -81,6 +75,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 //			return employeeRepository.save(employee);
 //		}
 //		return employee;
+		return employee;
+	}
+
+	private Employee setEmployeeData(EmployeeDTO employeeDTO, List<Employee> employees) {
+		Employee employee;
+		employee = employees.get(0);
+		employee.setBirthDate(employeeDTO.getTanggalLahir());
+		employee.setGender(employeeDTO.getJenisKelamin() == GenderConverter.gender.Pria ? 1 : 2);
+		employee.setIdNumber(employeeDTO.getNip());
+		employee.setIsDelete(0);
+		employee.setName(employeeDTO.getNama());
+		employee.setPosition(positionRepository.findByCode(employeeDTO.getCodeJabatan()));
 		return employee;
 	}
 
