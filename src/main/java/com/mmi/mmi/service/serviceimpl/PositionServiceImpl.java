@@ -52,11 +52,9 @@ public class PositionServiceImpl implements PositionService {
 	@Compliance(action = ComplianceAction.create)
 	public Position savePosition(PositionDTO positionDTO) {
 		Position position = new Position();
-		position.setCode(positionDTO.getCode());
-		position.setName(positionDTO.getName());
-		position.setIsDelete(0);
-		
-		return positionRepository.save(position);
+		position.setDataPositionDto(positionDTO);
+		position = positionRepository.save(position);
+		return position;
 	}
 	
 

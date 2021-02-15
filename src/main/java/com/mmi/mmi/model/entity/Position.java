@@ -16,6 +16,7 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mmi.mmi.dto.PositionDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,5 +56,11 @@ public class Position implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "position")
 	@JsonIgnore
 	private Set<User> user = new HashSet<>();
+	
+	public void setDataPositionDto(PositionDTO positionDTO) {
+		this.code = positionDTO.getCode();
+		this.name = positionDTO.getName();
+		this.isDelete = 0;
+	}
 	
 }
