@@ -15,8 +15,6 @@ import com.mmi.mmi.model.entity.Position;
 import com.mmi.mmi.repository.PositionRepository;
 import com.mmi.mmi.service.PositionService;
 
-import javassist.NotFoundException;
-
 
 @Service
 public class PositionServiceImpl implements PositionService {
@@ -24,9 +22,14 @@ public class PositionServiceImpl implements PositionService {
 	@Autowired
 	private PositionRepository positionRepository;
 
+	public PositionServiceImpl(PositionRepository positionRepository) {
+		super();
+		this.positionRepository = positionRepository;
+	}
+
 	@Override
 	@Compliance(action = ComplianceAction.read)
-	public PositionDTO getPositionByCode(String code) throws NotFoundException {
+	public PositionDTO getPositionByCode(String code) {
 		
 		PositionDTO positionDTO = new PositionDTO();
 		Position position = positionRepository.findByCode(code);
