@@ -7,10 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import com.mmi.mmi.config.aspect.Compliance;
-import com.mmi.mmi.config.aspect.LoggingAspect;
 import com.mmi.mmi.dto.PositionDTO;
 import com.mmi.mmi.model.ComplianceAction;
 import com.mmi.mmi.model.Position;
@@ -19,8 +17,6 @@ import com.mmi.mmi.service.PositionService;
 
 @Service
 public class PositionServiceImpl implements PositionService {
-	
-	private static final Logger LOGGER = LogManager.getLogger(PositionServiceImpl.class);
 	
 	@Autowired
 	private PositionRepository positionRepository;

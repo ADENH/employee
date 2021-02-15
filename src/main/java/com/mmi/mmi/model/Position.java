@@ -18,11 +18,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString(of = {"code","name"})
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Position implements Serializable {
 	/**
@@ -50,9 +54,4 @@ public class Position implements Serializable {
 	@JsonIgnore
 	private Set<User> user = new HashSet<>();
 	
-	@Override  
-	public String toString()  
-	{  
-	return "Position [Position id=" + id+ ", code=" + code + ", name=" + name + ", isDelete=" + isDelete + "]";  
-	} 
 }
