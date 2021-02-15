@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 import com.mmi.mmi.config.aspect.LoggingAspect;
-import com.mmi.mmi.model.Employee;
+import com.mmi.mmi.model.entity.Employee;
 
 @Aspect
 @Component

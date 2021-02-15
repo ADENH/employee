@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
-import com.mmi.mmi.model.Position;
+import com.mmi.mmi.model.entity.Position;
 
 @Aspect  
 @Component  

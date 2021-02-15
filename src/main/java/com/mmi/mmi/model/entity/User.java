@@ -1,4 +1,4 @@
-package com.mmi.mmi.model;
+package com.mmi.mmi.model.entity;
 
 import java.io.Serializable;
 

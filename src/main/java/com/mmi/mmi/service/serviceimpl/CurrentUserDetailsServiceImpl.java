@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.mmi.mmi.model.CurrentPrincipal;
-import com.mmi.mmi.model.User;
+import com.mmi.mmi.model.entity.User;
 import com.mmi.mmi.service.UserService;
 @Service
 public class CurrentUserDetailsServiceImpl implements UserDetailsService {

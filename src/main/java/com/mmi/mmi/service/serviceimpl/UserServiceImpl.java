@@ -10,8 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mmi.mmi.dto.UserDto;
-import com.mmi.mmi.model.Position;
-import com.mmi.mmi.model.User;
+import com.mmi.mmi.model.entity.Position;
+import com.mmi.mmi.model.entity.User;
 import com.mmi.mmi.repository.PositionRepository;
 import com.mmi.mmi.repository.UserRepository;
 import com.mmi.mmi.service.UserService;

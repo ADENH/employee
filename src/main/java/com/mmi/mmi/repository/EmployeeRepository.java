@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
-import com.mmi.mmi.model.Employee;
+import com.mmi.mmi.model.entity.Employee;
 
 public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
 	Employee findByIdNumber(int idNumber);

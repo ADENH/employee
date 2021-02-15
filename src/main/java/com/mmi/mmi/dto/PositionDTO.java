@@ -1,6 +1,6 @@
 package com.mmi.mmi.dto;
 
-import com.mmi.mmi.model.Position;
+import com.mmi.mmi.model.entity.Position;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

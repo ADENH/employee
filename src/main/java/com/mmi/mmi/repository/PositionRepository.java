@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.mmi.mmi.model.Position;
+import com.mmi.mmi.model.entity.Position;
 
 public interface PositionRepository extends PagingAndSortingRepository<Position, Integer> {
 	Position findByCode(String code);

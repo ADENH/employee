@@ -1,7 +1,7 @@
 package com.mmi.mmi.service.serviceimpl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,9 +11,12 @@ import org.springframework.stereotype.Service;
 import com.mmi.mmi.config.aspect.Compliance;
 import com.mmi.mmi.dto.PositionDTO;
 import com.mmi.mmi.model.ComplianceAction;
-import com.mmi.mmi.model.Position;
+import com.mmi.mmi.model.entity.Position;
 import com.mmi.mmi.repository.PositionRepository;
 import com.mmi.mmi.service.PositionService;
+
+import javassist.NotFoundException;
+
 
 @Service
 public class PositionServiceImpl implements PositionService {
@@ -23,14 +26,17 @@ public class PositionServiceImpl implements PositionService {
 
 	@Override
 	@Compliance(action = ComplianceAction.read)
-	public PositionDTO getPositionByCode(String code) {
+	public PositionDTO getPositionByCode(String code) throws NotFoundException {
+		
 		PositionDTO positionDTO = new PositionDTO();
 		Position position = positionRepository.findByCode(code);
-		if(position != null) {
-			positionDTO.setCode(position.getCode());
-			positionDTO.setName(position.getName());
+		
+		if(position == null) {
+			throw new EntityNotFoundException("Jabatan tidak ditemukan");
 		}
 		
+		positionDTO.setCode(position.getCode());
+		positionDTO.setName(position.getName());
 		return positionDTO;
 	}
 

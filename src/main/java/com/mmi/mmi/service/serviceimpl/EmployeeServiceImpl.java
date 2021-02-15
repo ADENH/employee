@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.mmi.mmi.dto.EmployeeDTO;
-import com.mmi.mmi.model.Employee;
+import com.mmi.mmi.model.entity.Employee;
 import com.mmi.mmi.repository.EmployeeRepository;
 import com.mmi.mmi.repository.PositionRepository;
 import com.mmi.mmi.service.EmployeeService;

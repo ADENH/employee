@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 
 import com.mmi.mmi.dto.EmployeeDTO;
-import com.mmi.mmi.model.Employee;
+import com.mmi.mmi.model.entity.Employee;
 
 public interface EmployeeService {
 	Optional<Employee> getById(int id);

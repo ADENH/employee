@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mmi.mmi.dto.UserDto;
-import com.mmi.mmi.model.User;
+import com.mmi.mmi.model.entity.User;
 import com.mmi.mmi.service.UserService;
 
 @RestController

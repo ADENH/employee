@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.mmi.mmi.model.entity.User;
+
 public class CurrentPrincipal implements UserDetails {
 	
 	/**

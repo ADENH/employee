@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mmi.mmi.dto.EmployeeDTO;
-import com.mmi.mmi.model.Employee;
+import com.mmi.mmi.model.entity.Employee;
 import com.mmi.mmi.service.EmployeeService;
 
 @CrossOrigin(origins = "*",allowedHeaders = "*")

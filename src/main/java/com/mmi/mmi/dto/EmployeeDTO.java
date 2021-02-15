@@ -3,7 +3,7 @@ package com.mmi.mmi.dto;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mmi.mmi.model.Employee;
+import com.mmi.mmi.model.entity.Employee;
 import com.mmi.mmi.service.converter.GenderConverter;
 import com.mmi.mmi.service.converter.GenderConverter.gender;
 

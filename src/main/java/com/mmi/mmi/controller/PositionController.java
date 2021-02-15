@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mmi.mmi.dto.PositionDTO;
-import com.mmi.mmi.model.Position;
+import com.mmi.mmi.model.entity.Position;
 import com.mmi.mmi.service.PositionService;
+
+import javassist.NotFoundException;
 
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
@@ -36,7 +38,7 @@ public class PositionController {
 	}
 	
 	@GetMapping("/positions/{code}")
-	public PositionDTO getPositionByCode(@PathVariable("code") String code) {
+	public PositionDTO getPositionByCode(@PathVariable("code") String code) throws NotFoundException  {
 		return positionService.getPositionByCode(code);
 	}
 	

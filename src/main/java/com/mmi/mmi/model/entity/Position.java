@@ -1,4 +1,4 @@
-package com.mmi.mmi.model;
+package com.mmi.mmi.model.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -17,6 +17,7 @@ import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +27,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(of = {"code","name"})
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Position implements Serializable {

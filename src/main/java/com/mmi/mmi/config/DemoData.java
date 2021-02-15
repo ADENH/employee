@@ -6,7 +6,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import com.mmi.mmi.dto.UserDto;
-import com.mmi.mmi.model.Position;
+import com.mmi.mmi.model.entity.Position;
 import com.mmi.mmi.repository.PositionRepository;
 import com.mmi.mmi.service.UserService;
 
