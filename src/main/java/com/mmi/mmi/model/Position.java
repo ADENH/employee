@@ -49,4 +49,10 @@ public class Position implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "position")
 	@JsonIgnore
 	private Set<User> user = new HashSet<>();
+	
+	@Override  
+	public String toString()  
+	{  
+	return "Position [Position id=" + id+ ", code=" + code + ", name=" + name + ", isDelete=" + isDelete + "]";  
+	} 
 }
