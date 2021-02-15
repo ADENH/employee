@@ -8,15 +8,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.mmi.mmi.model.ApiError;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@ControllerAdvice
+@RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
@@ -32,7 +32,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(EntityNotFoundException.class)
 	protected ResponseEntity<Object> handleEntityNotFound(EntityNotFoundException ex) {
 		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND,ex);
-		apiError.setMessage(ex.getMessage());
+		apiError.setDebugMessage(ex.getMessage());
 		return buildResponseEntity(apiError);
 	}
 }

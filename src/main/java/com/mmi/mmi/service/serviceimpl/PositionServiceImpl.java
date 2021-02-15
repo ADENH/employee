@@ -31,9 +31,7 @@ public class PositionServiceImpl implements PositionService {
 		PositionDTO positionDTO = new PositionDTO();
 		Position position = positionRepository.findByCode(code);
 		
-		if(position == null) {
-			throw new EntityNotFoundException("Jabatan tidak ditemukan");
-		}
+		if(position == null) throw new EntityNotFoundException("Jabatan tidak ditemukan");
 		
 		positionDTO.setCode(position.getCode());
 		positionDTO.setName(position.getName());
