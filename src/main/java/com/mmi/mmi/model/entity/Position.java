@@ -63,4 +63,24 @@ public class Position implements Serializable {
 		this.isDelete = 0;
 	}
 	
+	public Position(Integer id,String code,String name,Integer isDelete) {
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.isDelete = isDelete;
+	}
+	
+	public Position(String code,String name,Integer isDelete) {
+		this.code = code;
+		this.name = name;
+		this.isDelete = isDelete;
+	}
+	
+	public Position(String code,String name) {
+		
+		this.code = code;
+		this.name = name;
+		
+	}
+	
 }
