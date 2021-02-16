@@ -11,7 +11,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.mmi.mmi.config.aspect.Compliance;
 import com.mmi.mmi.dto.EmployeeDTO;
+import com.mmi.mmi.model.ComplianceAction;
 import com.mmi.mmi.model.entity.Employee;
 import com.mmi.mmi.repository.EmployeeRepository;
 import com.mmi.mmi.repository.PositionRepository;
@@ -28,6 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	PositionRepository positionRepository;
 	
 	@Override
+	@Compliance(action = ComplianceAction.read)
 	public Optional<Employee> getById(int id) {
 		return employeeRepository.findById(id);
 	}
@@ -37,9 +40,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return null;
 	}
 
-
-
 	@Override
+	@Compliance(action = ComplianceAction.create)
 	public Employee saveEmployee(EmployeeDTO employeeDTO) {
 		System.out.println(employeeDTO.getJenisKelamin());
 		Employee employee = new Employee();
@@ -53,6 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
+	@Compliance(action = ComplianceAction.update)
 	public Employee editEmployee(EmployeeDTO employeeDTO,Integer idNumber) {
 		Employee employee = new Employee();
 		System.out.println(employeeDTO);
@@ -91,6 +94,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
+	@Compliance(action = ComplianceAction.delete)
 	public Employee deleteEmployee(int idNumber) {
 		Employee employee = employeeRepository.findByIdNumber(idNumber);
 		if(employee.getIdNumber() != null) {
