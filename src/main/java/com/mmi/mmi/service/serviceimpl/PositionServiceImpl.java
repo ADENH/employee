@@ -2,6 +2,7 @@ package com.mmi.mmi.service.serviceimpl;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.hibernate.UnresolvableObjectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -54,6 +55,8 @@ public class PositionServiceImpl implements PositionService {
 		Position position = new Position();
 		position.setDataPositionDto(positionDTO);
 		position = positionRepository.save(position);
+		
+		if(position.getId() == null) throw new UnresolvableObjectException(Position.class,"Gagal save data position");
 		return position;
 	}
 	

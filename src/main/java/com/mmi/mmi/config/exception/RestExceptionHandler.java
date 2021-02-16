@@ -2,6 +2,7 @@ package com.mmi.mmi.config.exception;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.hibernate.UnresolvableObjectException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +33,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(EntityNotFoundException.class)
 	protected ResponseEntity<Object> handleEntityNotFound(EntityNotFoundException ex) {
 		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND,ex);
+		apiError.setDebugMessage(ex.getMessage());
+		return buildResponseEntity(apiError);
+	}
+	
+	@ExceptionHandler(UnresolvableObjectException.class)
+	protected ResponseEntity<Object> handleEntityNotProcess(UnresolvableObjectException ex) {
+		ApiError apiError = new ApiError(HttpStatus.EXPECTATION_FAILED,ex);
 		apiError.setDebugMessage(ex.getMessage());
 		return buildResponseEntity(apiError);
 	}
