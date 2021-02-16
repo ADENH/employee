@@ -10,7 +10,6 @@ import javax.persistence.EntityNotFoundException;
 
 import org.hibernate.UnresolvableObjectException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,13 +21,11 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import com.mmi.mmi.dto.EmployeeDTO;
 import com.mmi.mmi.dto.PositionDTO;
 import com.mmi.mmi.model.entity.Employee;
 import com.mmi.mmi.model.entity.Position;
 import com.mmi.mmi.model.entity.User;
 import com.mmi.mmi.repository.PositionRepository;
-import com.mmi.mmi.service.converter.GenderConverter;
 import com.mmi.mmi.service.serviceimpl.PositionServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,12 +34,6 @@ public class PositionServiceImplTest {
 	private static PositionRepository positionRepository;
 	@InjectMocks
 	private PositionServiceImpl positionServiceImpl;
-	
-	
-	@BeforeEach
-	void setUp() {
-		positionServiceImpl = new PositionServiceImpl(positionRepository);
-	}
 	
 	@Test
 	void getPositionByCodeTest() {

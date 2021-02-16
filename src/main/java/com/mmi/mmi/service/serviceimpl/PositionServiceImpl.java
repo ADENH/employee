@@ -23,11 +23,6 @@ public class PositionServiceImpl implements PositionService {
 	@Autowired
 	private PositionRepository positionRepository;
 
-	public PositionServiceImpl(PositionRepository positionRepository) {
-		super();
-		this.positionRepository = positionRepository;
-	}
-
 	@Override
 	@Compliance(action = ComplianceAction.read)
 	public PositionDTO getPositionByCode(String code) {
