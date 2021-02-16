@@ -43,4 +43,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		apiError.setDebugMessage(ex.getMessage());
 		return buildResponseEntity(apiError);
 	}
+	
+	@ExceptionHandler(Exception.class)
+	protected ResponseEntity<Object> handleEntityException(Exception ex) {
+		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST,ex);
+		apiError.setDebugMessage(ex.getMessage());
+		return buildResponseEntity(apiError);
+	}
 }
