@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.hibernate.UnresolvableObjectException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -91,6 +92,24 @@ public class PositionServiceImplTest {
 		Assertions.assertEquals("Manager", position.getName());
 		Assertions.assertEquals(0, position.getIsDelete());
 //		Assertions.assertEquals(position.getCode(), mockPosition.getCode());
+	}
+	
+	@Test
+	void savePositionFailedTest() {
+		
+		Employee employee = new Employee();
+		Set<Employee> dataEmployee = new HashSet<Employee>();
+		dataEmployee.add(employee);
+		
+		User user = new User();
+		Set<User> dataUser = new HashSet<User>();
+		dataUser.add(user);
+
+		Mockito.when(positionRepository.save(Mockito.any(Position.class))).thenReturn(new Position(null,"MNG","Manager",0,dataEmployee,dataUser));
+		
+		Assertions.assertThrows(UnresolvableObjectException.class , () -> {
+			positionServiceImpl.savePosition(new PositionDTO("MNG", "Manager"));
+		});
 	}
 	
 	@Test 
