@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.mmi.mmi.model.entity.Employee;
-
-public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
+@Repository
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	Employee findByIdNumber(int idNumber);
 	List<Employee> findByName(String name);
 	Page<Employee> findAll(Pageable pageable);
