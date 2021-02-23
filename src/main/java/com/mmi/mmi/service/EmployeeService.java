@@ -1,5 +1,6 @@
 package com.mmi.mmi.service;
 
+import java.text.ParseException;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -11,9 +12,9 @@ public interface EmployeeService {
 	Optional<Employee> getById(int id);
 	EmployeeDTO getEmployeeByName(String name);
 	Page<EmployeeDTO> getAllEmployee(int page, int size);
-	Employee saveEmployee(EmployeeDTO employeeDTO);
+	Employee saveEmployee(EmployeeDTO employeeDTO) throws ParseException;
 	Employee deleteEmployee(int idNumber);
 	EmployeeDTO getByIdNumber(int idNumber);
-	Employee editEmployee(EmployeeDTO employeeDTO, Integer idNumber);
+	Employee editEmployee(EmployeeDTO employeeDTO, Integer idNumber) throws ParseException;
 
 }

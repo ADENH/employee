@@ -1,5 +1,8 @@
 package com.mmi.mmi.config.exception;
 
+import java.text.ParseException;
+import java.util.NoSuchElementException;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.hibernate.UnresolvableObjectException;
@@ -37,10 +40,25 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return buildResponseEntity(apiError);
 	}
 	
+	@ExceptionHandler(NoSuchElementException.class)
+	protected ResponseEntity<Object> handleEntityNotFound(NoSuchElementException ex) {
+		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND,ex);
+		apiError.setDebugMessage(ex.getMessage());
+		return buildResponseEntity(apiError);
+	}
+	
 	@ExceptionHandler(UnresolvableObjectException.class)
 	protected ResponseEntity<Object> handleEntityNotProcess(UnresolvableObjectException ex) {
 		ApiError apiError = new ApiError(HttpStatus.EXPECTATION_FAILED,ex);
 		apiError.setDebugMessage(ex.getMessage());
+		return buildResponseEntity(apiError);
+	}
+	
+	@ExceptionHandler(ParseException.class)
+	protected ResponseEntity<Object> handleParseException(ParseException ex) {
+		ApiError apiError = new ApiError(HttpStatus.EXPECTATION_FAILED,ex);
+		apiError.setDebugMessage(ex.getMessage());
+		apiError.setMessage("Error Parsing");
 		return buildResponseEntity(apiError);
 	}
 	

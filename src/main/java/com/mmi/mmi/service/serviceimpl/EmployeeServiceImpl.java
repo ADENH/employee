@@ -1,9 +1,13 @@
 package com.mmi.mmi.service.serviceimpl;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.UnresolvableObjectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.mmi.mmi.config.aspect.Compliance;
+import com.mmi.mmi.config.util.DateFormatConverter;
 import com.mmi.mmi.dto.EmployeeDTO;
 import com.mmi.mmi.model.ComplianceAction;
 import com.mmi.mmi.model.entity.Employee;
@@ -29,6 +34,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	PositionRepository positionRepository;
 	
+	private static final Logger LOGGER = LogManager.getLogger(EmployeeServiceImpl.class);
+	
 	@Override
 	@Compliance(action = ComplianceAction.read)
 	public Optional<Employee> getById(int id) {
@@ -42,21 +49,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	@Compliance(action = ComplianceAction.create)
-	public Employee saveEmployee(EmployeeDTO employeeDTO) {
-		System.out.println(employeeDTO.getJenisKelamin());
+	public Employee saveEmployee(EmployeeDTO employeeDTO) throws ParseException {
+		DateFormatConverter dateFormatConverter = new DateFormatConverter();
+		LOGGER.info("return employee DTO "+employeeDTO);
 		Employee employee = new Employee();
-		employee.setBirthDate(employeeDTO.getTanggalLahir());
+		employee.setBirthDate(dateFormatConverter.dateConverter(employeeDTO.getTanggalLahir()));
 		employee.setGender(employeeDTO.getJenisKelamin() == GenderConverter.gender.Pria ? 1 : 2);
 		employee.setIdNumber(employeeDTO.getNip());
 		employee.setIsDelete(0);
 		employee.setName(employeeDTO.getNama());
 		employee.setPosition(positionRepository.findByCode(employeeDTO.getCodeJabatan()));
-		return employeeRepository.save(employee);
+		LOGGER.info("return employee sebelum disave "+employee);
+		employee = employeeRepository.save(employee);
+		if(employee.getId() == null ) throw new UnresolvableObjectException(Employee.class,"Gagal save data employee");
+		employee.setBirthDate(dateFormatConverter.dateConverter(employeeDTO.getTanggalLahir()));
+		return employee;
 	}
 
 	@Override
 	@Compliance(action = ComplianceAction.update)
-	public Employee editEmployee(EmployeeDTO employeeDTO,Integer idNumber) {
+	public Employee editEmployee(EmployeeDTO employeeDTO,Integer idNumber) throws ParseException {
 		Employee employee = new Employee();
 		System.out.println(employeeDTO);
 		List<Employee> employees = employeeRepository.findByIdNumber(idNumber);
@@ -81,10 +93,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employee;
 	}
 
-	private Employee setEmployeeData(EmployeeDTO employeeDTO, List<Employee> employees) {
+	private Employee setEmployeeData(EmployeeDTO employeeDTO, List<Employee> employees) throws ParseException {
+		DateFormatConverter dateFormatConverter= new DateFormatConverter();
 		Employee employee;
 		employee = employees.get(0);
-		employee.setBirthDate(employeeDTO.getTanggalLahir());
+		employee.setBirthDate(dateFormatConverter.dateConverter(employeeDTO.getTanggalLahir()));
 		employee.setGender(employeeDTO.getJenisKelamin() == GenderConverter.gender.Pria ? 1 : 2);
 		employee.setIdNumber(employeeDTO.getNip());
 		employee.setIsDelete(0);
@@ -120,7 +133,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 				.stream()
 				.map(employee -> new EmployeeDTO(
 						employee.getName(),
-						employee.getBirthDate(),
+						employee.getBirthDate().toString(),
 						employee.getPosition().getCode(),
 						employee.getPosition().getName(),
 						employee.getIdNumber(),
@@ -138,6 +151,5 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		return employeeDTO;
 	}
-	
 
 }

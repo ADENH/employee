@@ -1,9 +1,11 @@
 package com.mmi.mmi.controller;
 
+import java.text.ParseException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,8 +41,8 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/employee")
-	public Employee saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-		return employeeService.saveEmployee(employeeDTO);
+	public ResponseEntity<?> saveEmployee(@RequestBody EmployeeDTO employeeDTO) throws ParseException {
+		return new ResponseEntity<>(HttpStatus.CREATED) ;
 	}
 	
 	@GetMapping("/employee")
@@ -56,7 +58,7 @@ public class EmployeeController {
 	}
 	
 	@PutMapping("/employee/{idNumber}")
-	public Employee updateEmployee(@PathVariable int idNumber,@RequestBody EmployeeDTO employeeDTO) {
+	public Employee updateEmployee(@PathVariable int idNumber,@RequestBody EmployeeDTO employeeDTO) throws ParseException {
 		System.out.println(employeeDTO);
 		return employeeService.editEmployee(employeeDTO, idNumber);
 	}
