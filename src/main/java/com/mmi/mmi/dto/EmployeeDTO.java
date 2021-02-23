@@ -1,8 +1,5 @@
 package com.mmi.mmi.dto;
 
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mmi.mmi.model.entity.Employee;
 import com.mmi.mmi.service.converter.GenderConverter;
 import com.mmi.mmi.service.converter.GenderConverter.gender;
@@ -16,8 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmployeeDTO {
 	private String nama;
-	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date tanggalLahir;
+	private String tanggalLahir;
 	private String codeJabatan;
 	private String jabatan;
 	private int nip;
@@ -25,7 +21,7 @@ public class EmployeeDTO {
 	
 	public void setDataEmployee(Employee employee) {
 		this.nama = employee.getName();
-		this.tanggalLahir = employee.getBirthDate();
+		this.tanggalLahir = employee.getBirthDate().toString();
 		this.codeJabatan = employee.getPosition().getCode();
 		this.jabatan = employee.getPosition().getName();
 		this.nip = employee.getIdNumber();
