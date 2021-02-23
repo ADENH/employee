@@ -30,5 +30,7 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
 //        .antMatchers("/**").authenticated()
         .and()
         .httpBasic();
+		
+		http.headers().frameOptions().disable();
 	}
 }
